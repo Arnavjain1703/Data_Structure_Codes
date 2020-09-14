@@ -20,4 +20,7 @@ int main()
      cout<<a[i]<<'\n';
    }
 
+   //Sorting vector sort(v.begin(),v.end());
+   // sort(v.begin(),v.end(),greater<int>());
+
 }
