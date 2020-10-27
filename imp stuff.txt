@@ -4,13 +4,23 @@ map<int,int,greater<int>>A;
 on applying for loop in A;
 this will give a sorted value according to x.first;
 
-===================================================================
-inorder to get x.second sorted;
-use vector<pair<int ,int>>A;
-bool mysort(pair<int,int>&a,pair<int,int>&b)
+==============================================================================================================
+                 
+                           Get Vector of Pair Sorted According to Second Element of map 
+
+bool mycomp(pair<char,ll>p1,pair<char,ll>p2)
 {
-	return a.second>b.second;
+  return p1.second>p2.second;
+} 
+vector<pair<char,ll>>sort(map<char,ll>A)
+{
+    vector<pair<char,ll>>C;
+    for(auto X:A)
+    {
+      C.push_back(X);
+    }
+    sort(C.begin(),C.end(),mycomp);
+    return C;
 }
-sort(V.begin(),V.end(),mysort);
 
 ===================================================================
