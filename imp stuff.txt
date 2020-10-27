@@ -1,0 +1,16 @@
+map<int,int>A;
+map<int,int,greater<int>>A;
+
+on applying for loop in A;
+this will give a sorted value according to x.first;
+
+===================================================================
+inorder to get x.second sorted;
+use vector<pair<int ,int>>A;
+bool mysort(pair<int,int>&a,pair<int,int>&b)
+{
+	return a.second>b.second;
+}
+sort(V.begin(),V.end(),mysort);
+
+===================================================================
