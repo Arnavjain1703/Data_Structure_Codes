@@ -23,4 +23,24 @@ vector<pair<char,ll>>sort(map<char,ll>A)
     return C;
 }
 
-===================================================================
+=============================================================================================================
+                                Convert lower case char to Upper case char
+
+
+
+void solve()
+{  
+   char c='a';
+   cout<<(char)toupper(c);
+   cout<<c;
+}
+
+=============================================================================================================
+                                Convert Upper case char to lower case char
+
+void solve()
+{  
+   char c='a';
+   cout<<(char)tolower(c);
+   cout<<c;
+}
