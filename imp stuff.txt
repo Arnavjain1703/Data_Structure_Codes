@@ -23,24 +23,30 @@ vector<pair<char,ll>>sort(map<char,ll>A)
     return C;
 }
 
-=============================================================================================================
-                                Convert lower case char to Upper case char
-
-
+==============================================================================================================
+                                  Convert String to Upper case
 
 void solve()
 {  
-   char c='a';
-   cout<<(char)toupper(c);
-   cout<<c;
+  string my_str = "sfkjbv";
+
+   cout << "Main string: " << my_str << endl;
+   transform(my_str.begin(), my_str.end(), my_str.begin(), ::toupper);
+
+   cout << "Converted String: " << my_str;
 }
 
-=============================================================================================================
-                                Convert Upper case char to lower case char
+==============================================================================================================
+                                         Convert String to Lower case
 
 void solve()
 {  
-   char c='a';
-   cout<<(char)tolower(c);
-   cout<<c;
+  string my_str = "sfkjbv";
+
+   cout << "Main string: " << my_str << endl;
+   transform(my_str.begin(), my_str.end(), my_str.begin(), ::tolower);
+
+   cout << "Converted String: " << my_str;
 }
+
+=============================================================================================================
