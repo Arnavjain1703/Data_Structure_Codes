@@ -1,0 +1,82 @@
+void Merge(ll l, ll m, ll h, ll arr[])
+{
+   ll n1=m-l+1;
+   ll n2=h-m;
+   ll left[n1];
+   ll right[n2];
+   ll I=0;
+   ll J=0;
+   for(ll i=0;i<n1;i++)
+   {
+      left[i]=arr[l+i];
+   }
+   for(ll i=0;i<n2;i++)
+   {
+      right[i]=arr[m+1+i];
+   }
+   ll K=l;
+   while(I<n1 && J<n2)
+   {
+       if(left[I]>right[J])
+       {
+         arr[K]=right[J];
+         J++;
+         K++;
+       }
+       else 
+       {
+         arr[K]=left[I];
+         I++;
+         K++;
+       }
+    }
+    while(I<n1)
+    {
+       arr[K]=left[I];
+       I++;
+       K++;
+    }
+    while(J<n2)
+    {
+       arr[K]=right[J];
+       J++;
+       K++;
+    }
+}
+void Sort(ll l,ll h,ll arr[])
+{    if(l<h)
+     {
+     ll m=(l+h)/2;
+     Sort(l,m,arr);
+     Sort(m+1,h,arr);
+     Merge(l,m,h,arr);
+     }
+}
+void MergeSort()
+{
+    ll n;
+    cin>>n;
+    ll a[n];
+    for(ll i=0;i<n;i++)
+    {
+      cin>>a[i];
+    }
+    Sort(0,n-1,a);
+    for(ll i=0;i<7;i++)
+    {
+      cout<<a[i]<<'\n';
+    }
+}
+int main() {
+  #ifndef ONLINE_JUDGE
+    freopen("inputf.in","r",stdin);
+    freopen("outputf.in","w",stdout);
+  #endif  
+   // int t; cin>>t ; while(t--)
+  MergeSort();
+  
+}
+
+worst case O(nlogn);
+average case O(nlogn);
+best case O(nlogn);
