@@ -1,0 +1,75 @@
+void Merge(ll l, ll m, ll h, ll arr[],ll*count)
+{
+   ll n1=m-l+1;
+   ll n2=h-m;
+   ll left[n1];
+   ll right[n2];
+   ll I=0;
+   ll J=0;
+   for(ll i=0;i<n1;i++)
+   {
+      left[i]=arr[l+i];
+   }
+   for(ll i=0;i<n2;i++)
+   {
+      right[i]=arr[m+1+i];
+   }
+   ll K=l;
+   while(I<n1 && J<n2)
+   {
+       if(left[I]>right[J])
+       {
+         arr[K]=right[J];
+         *count=*count+n1-I;
+         J++;
+         K++;
+       }
+       else 
+       {
+         arr[K]=left[I];
+         I++;
+         K++;
+       }
+    }
+    while(I<n1)
+    {
+       arr[K]=left[I];
+       I++;
+       K++;
+    }
+    while(J<n2)
+    {
+       arr[K]=right[J];
+       J++;
+       K++;
+    }
+}
+void Sort(ll l,ll h,ll arr[],ll*count)
+{    if(l<h)
+     { 
+      
+     ll m=(l+h)/2;
+     Sort(l,m,arr,count);
+     Sort(m+1,h,arr,count);
+     Merge(l,m,h,arr,count);
+     }
+}
+void Inversion()
+{   ll count=0;
+    ll arr[7]={7,6,5,4,3,2,2};
+    Sort(0,6,arr,&count);
+    cout<<count<<'\n';
+}
+int main() {
+  #ifndef ONLINE_JUDGE
+    freopen("inputf.in","r",stdin);
+    freopen("outputf.in","w",stdout);
+  #endif  
+   // int t; cin>>t ; while(t--)
+  Inversion();
+  
+}
+
+
+
+//inversion means A[i]>A[j] && j>i;
