@@ -1,0 +1,41 @@
+ll L_Partition(ll arr[],ll l,ll h)
+{
+   ll I=l-1;
+   for(ll i=l;i<h;i++)
+   {
+      if(arr[i]<arr[h])
+      {
+        I++;
+        swap(arr[I],arr[i]);
+      }
+   }
+   I++;
+   swap(arr[I],arr[h]);
+   return I;
+}
+void Kth_smaillest_element(ll arr[],ll l,ll h,ll K)
+{
+   if(l<=h)
+   {
+      ll L=L_Partition(arr,l,h);
+      if(L+1==K)
+      {
+        cout<<arr[L]<<'\n';
+        return ;
+      }
+      Kth_smaillest_element(arr,l,L-1,K);
+      Kth_smaillest_element(arr,L+1,h,K);
+   }
+}
+int main() {
+  #ifndef ONLINE_JUDGE
+    freopen("inputf.in","r",stdin);
+    freopen("outputf.in","w",stdout);
+  #endif  
+  ll arr[7]={4,6,5,2,3,8,7};
+  ll K;
+  cin>>K;
+  Kth_smaillest_element(arr,0,6,K);
+
+  for(ll i=0;i<7;i++){cout<<arr[i]<<' ';}
+}
