@@ -1,0 +1,33 @@
+ll L_Partition(ll arr[],ll l,ll h)
+{
+   ll I=l-1;
+   for(int i=l;i<h;i++)
+   {
+     if(arr[i]<=arr[h])
+     {
+        I++;
+        swap(arr[i],arr[I]);
+     }
+   }
+   I++;
+   swap(arr[I],arr[h]);
+   return I;
+}
+void Qsort(ll arr[],ll l,ll h)
+{
+   if(l<h)
+   {
+     ll I=L_Partition(arr,l,h);
+     Qsort(arr,l,I-1);
+     Qsort(arr,I+1,h);
+   }
+}
+int main() {
+  #ifndef ONLINE_JUDGE
+    freopen("inputf.in","r",stdin);
+    freopen("outputf.in","w",stdout);
+  #endif  
+  ll arr[7]={1,6,5,2,3,8,7};
+  Qsort(arr,0,6);
+  for(ll i=0;i<7;i++){cout<<arr[i]<<' ';}
+}
