@@ -1,0 +1,44 @@
+class Solution
+{   
+public:
+    int determinantOfMatrix(vector<vector<int> > matrix, int n)
+    {
+      int ans=0; 
+        if(n==1)
+        {
+            return matrix[0][0];
+        }
+        if(n==2)
+        {
+            return matrix[0][0]*matrix[1][1]-matrix[0][1]*matrix[1][0];
+        }
+        else
+        {
+          
+           for(int c=0;c<n;c++)
+           {   vector<vector<int>>a;
+               for(int i=1;i<n;i++)
+               {   vector<int>e;
+                   for(int j=0;j<n;j++)
+                   {  
+                       if(j==c)
+                       {
+                           continue;
+                       }
+                      e.push_back(matrix[i][j]);
+                   }
+                   a.push_back(e);
+               }
+               if(c%2==0)
+               {
+                  ans=ans+matrix[0][c]*determinantOfMatrix(a,n-1);
+               }
+               else
+               {
+                  ans=ans-matrix[0][c]*determinantOfMatrix(a,n-1); 
+               }
+           }
+        }
+        return ans; 
+    }
+};
