@@ -1,0 +1,51 @@
+class Human{
+  private:
+       string name;
+       int age;
+  public:
+       Human()
+       {
+         name="DEFAULT NAME";
+         age=0; 
+         cout<<"will run when no input is given";  
+       }
+       Human(int iage)
+       {
+         name="DEFAULT NAME";
+         age=iage;
+         cout<<"will run when age as a input is given";   
+       }  
+       Human(string iname)
+       {
+         name=iname;
+         age=0;
+         cout<<"will run when name as a input is given";   
+       } 
+       Human(string iname,int iage)
+       {
+         name=iname;
+         age=iage;
+         cout<<"will run when name and age as a input is given";   
+       } 
+       void display()
+       {
+         cout<<name<<" "<<age<<'\n';
+       }         
+  };
+int main() {
+	#ifndef ONLINE_JUDGE
+		freopen("inputf.in","r",stdin);
+		freopen("outputf.in","w",stdout);
+	#endif	
+  Human arnav;
+  arnav.display();
+
+  Human arnavName("Arnav");
+  arnavName.display();
+  
+  Human arnavage(2);
+  arnavage.display();
+
+  Human arnavagename("arnav",2);
+  arnavagename.display();   
+}
