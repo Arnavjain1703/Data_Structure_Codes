@@ -1,0 +1,29 @@
+Given a singly linked list of size N. The task is to swap elements in the linked list pairwise.
+For example, if the input list is 1 2 3 4, the resulting list after swaps will be 2 1 4 3.
+
+
+Node* pairWiseSwap(struct Node* head) {
+  if(head==NULL || head->next==NULL)
+  {
+      return head;
+  }
+  Node*A=head;
+  head=head->next;
+  Node*P=NULL;
+  while(A!=NULL)
+  {   if(A->next==NULL)
+      {
+         return head;
+      }
+      Node*N=A->next->next;
+      A->next->next=A;
+      if(P!=NULL)
+      {
+      P->next=A->next;
+      }
+      P=A;
+      A->next=N;
+      A=N;
+  }
+  return head;
+}
