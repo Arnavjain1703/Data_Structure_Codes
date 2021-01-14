@@ -1,0 +1,65 @@
+Node* segregate(Node *head) {
+    Node*temp=head;
+    Node*prev=NULL;
+    Node*curr=NULL;
+    Node*last=NULL;
+    int n=0;
+    while(temp!=NULL)
+    {
+        n++;
+        if(temp->next==NULL)
+        {
+            last=temp;
+        }
+        temp=temp->next;
+    }
+    temp=head;
+    int i=0;
+    while(i<n)
+    {
+        if(temp->data==0)
+        {
+            if(head==temp)
+            {
+                prev=temp;
+                temp=temp->next;
+            }
+            else
+            {
+              curr=temp;
+              prev->next=temp->next;
+              temp=temp->next;
+              curr->next=head;
+              head=curr;
+            }
+        }
+        else if(temp->data==1)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        else
+        {
+            if(temp==head)
+            {
+                curr=temp;
+                temp=temp->next;
+                head=temp;
+                last->next=curr;
+                last=curr;
+                last->next=NULL;
+            }
+            else
+            {
+                curr=temp;
+                temp=temp->next;
+                prev->next=temp;
+                last->next=curr;
+                last=curr;
+                last->next=NULL;
+            }
+        }
+        i++;
+    }
+    return head;
+}
