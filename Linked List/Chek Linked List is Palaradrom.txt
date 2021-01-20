@@ -1,0 +1,44 @@
+Node*reverse(Node* head)
+{
+    Node*prev=NULL;
+    Node*temp=head;
+    Node*curr=temp;
+    
+    while(temp!=NULL){
+        curr=temp;
+        temp=temp->next;
+        curr->next=prev;
+        prev=curr;
+    }
+    return prev;
+
+}
+bool isPalindrome(Node *head)
+{
+    Node*temp=head;
+    int n=0;
+    while(temp!=NULL)
+    {
+       n++;
+       temp=temp->next;
+    }
+    n=n/2;
+    Node*temp2=head;
+    Node*temp3=head;
+    for(int i=1;i<=n;i++)
+    {
+        temp3=temp3->next;
+    }
+    temp3=reverse(temp3);
+   
+    for(int i=1;i<=n;i++)
+    {
+        if(temp2->data!=temp3->data)
+        {
+            return false;
+        }
+        temp2=temp2->next;
+        temp3=temp3->next;
+    }
+    return true;
+}
