@@ -1,0 +1,40 @@
+bool isCyclic(int V, vector<int> adj[]) {
+	   
+	   	 int degree[V]={0};
+	    vector<int>C;
+	    for(int i=0;i<V;i++)
+	    {
+	        for(auto X:adj[i])
+	        {
+	            degree[X]++;
+	        }
+	    }
+	    queue<int>A;
+	    for(int i=0;i<V;i++)
+	    {
+	        if(degree[i]==0)
+	        {
+	            A.push(i);
+	        }
+	    }
+	    int count=0;
+	    while(A.empty()==false)
+	    {   count++;
+	        int curr=A.front();
+	        C.push_back(curr);
+	        A.pop();
+	        for(auto X:adj[curr])
+	        { 
+	            degree[X]--;
+	            if(degree[X]==0)
+	            {
+	                A.push(X);
+	            }
+	        }
+	    }
+	    if(V==count)
+	    {
+	        return false;
+	    }
+	    return true;
+	}
