@@ -1,0 +1,27 @@
+class Solution {
+private:
+public:
+	int minSwaps(vector<int>&nums){
+	    vector<int>P;
+	    P=nums;
+	    sort(P.begin(),P.end());
+	    unordered_map<int,int>A;
+	    for(int i=0;i<P.size();i++)
+	    {
+	        A[nums[i]]=i;
+	    }
+	    int count=0;
+	    for(int i=0;i<P.size();i++)
+	    {
+	        if(nums[i]!=P[i])
+	        {   
+	            int x=nums[i];
+	            swap(nums[i],nums[A[P[i]]]);
+	            A[x]=A[P[i]];
+	            A[P[i]]=i;
+	            count++;
+	        }
+	    }
+	    return count;
+	}
+};
