@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+       int V[grid.size()][grid[0].size()]
+       queue<pair<int,int>>A;
+        for(int i=0;i<grid.size();i++)
+        {
+            for(int j=0;j<grid[0].size();j++)
+            {
+                if(grid[i][j]==2)
+                {
+                    V[i][j]=0;
+                    A.push(make_pair(i,j));
+                }
+                else
+                {
+                    V[i][j]=INT_MAX;
+                }
+            }
+        }
+        int p[]={1,0,0,-1};
+        int n[]={0,1,-1,0};
+        while(q.empty()==false)
+        {
+            int I=q.front().first;
+            int J=q.front().second;
+            for(ll i=0;i<4;i++)
+            {
+                int L=I+p[i];
+                int U=J+n[i];
+                if(L>=0 && L<grid.size() && U>=0 && U<grid[0].size() && V[L][U]>V[I][J]+1)
+                {
+                    q.push(make_pair(L,U))
+                }
+            }
+        }
+    }
+};
