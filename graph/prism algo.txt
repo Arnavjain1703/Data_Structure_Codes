@@ -1,12 +1,12 @@
- 
-for directed graph with non negative edge
+miimum spanning tree works for undirected weighted graph
 
-vector <int> dijkstra(vector<vector<int>> g, int src, int V)
+int prism(vector<vector<int>> g, int src, int V)
 {
     int find[V]={0};
     vector<int>dist(V,INT_MAX);
     dist[src]=0;
-    for(int i=0;i<V-1;i++)
+    int res=0; 
+    for(int i=0;i<V;i++)
     {
         int u=-1;
         for(int j=0;j<V;j++)
@@ -16,6 +16,7 @@ vector <int> dijkstra(vector<vector<int>> g, int src, int V)
                 u=j;
             }
         }
+	res =res+dist[u];
         find[u]=1;
         for(int c=0;c<V;c++)
         {
@@ -25,5 +26,5 @@ vector <int> dijkstra(vector<vector<int>> g, int src, int V)
             }
         }
     }
-    return dist;
+    return res;
 }
