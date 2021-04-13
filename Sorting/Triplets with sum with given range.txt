@@ -1,0 +1,62 @@
+Triplets with sum with given range 
+Medium Accuracy: 44.92% Submissions: 1009 Points: 4
+Given an array Arr[] of N distinct integers and a range from L to R, the task is to count the number of triplets having a sum in the range [L, R].
+
+
+Example 1:
+
+Input:
+N = 4
+Arr = {8 , 3, 5, 2}
+L = 7, R = 11
+Output: 1
+Explaination: There is only one triplet {2, 3, 5}
+having sum 10 in range [7, 11].
+
+
+
+class Solution {
+  public:
+    int countTriplets(int arr[], int n, int L, int R) {
+        sort(arr,arr+n);
+        int count1=0;
+        int count2=0;
+        for(int i=0;i<n-2;i++)
+        {
+            int I=i+1;
+            int J=n-1;
+            while(I<J)
+            {
+                int sum=arr[i]+arr[I]+arr[J];
+                if(sum>(L-1))
+                {
+                    J--;
+                }
+                else
+                {
+                    count1=count1+J-I;
+                    I++;
+                }
+            }
+        }
+        for(int i=0;i<n-2;i++)
+        {
+            int I=i+1;
+            int J=n-1;
+            while(I<J)
+            {
+                int sum=arr[i]+arr[I]+arr[J];
+                if(sum>R)
+                {
+                    J--;
+                }
+                else
+                {
+                    count2=count2+J-I;
+                    I++;
+                }
+            }
+        }
+       return count2-count1;
+    }
+};
