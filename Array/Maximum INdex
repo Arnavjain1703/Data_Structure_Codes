@@ -1,0 +1,65 @@
+int maxIndexDiff(int arr[], int n) 
+{ 
+   int left[n];
+   int right[n];
+  int Min=left[0]=arr[0];
+   int Max=right[n-1]=arr[n-1];
+   for(int i=1;i<n;i++)
+   {
+      Min=min(Min,arr[i]);
+      left[i]=Min;
+   }
+   for(int i=n-2;i>=0;i--)
+   {
+       Max=max(Max,arr[i]);
+       right[i]=Max;
+   }
+  int l=0;
+  int J=0;
+  int ans=INT_MIN;
+  while(l<n && J<n)
+  {
+      if(left[l]<=right[J])
+      {
+          ans=max(ans,J-l);
+          J++;
+      }
+      else
+      {
+          l++;
+      }
+    
+  }
+  return ans;
+}
+
+// { Driver Code Starts.
+  
+/* Driver program to test above functions */
+int main() 
+{
+    int T;
+    //testcases
+    cin>>T;
+    while(T--){
+        int num;
+        //size of array
+        cin>>num;
+        int arr[num];
+        
+        //inserting elements
+        for (int i = 0; i<num; i++)
+            cin>>arr[i];
+        
+        //printing 0 if size is 1
+        if(num ==1 ){
+            cout<<0<<endl;
+            continue;
+        }
+        
+        //calling maxIndexDiff() function
+        cout<<maxIndexDiff(arr, num)<<endl;    
+        
+    }
+    return 0;
+}   // } Driver Code Ends
