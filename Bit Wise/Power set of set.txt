@@ -1,0 +1,12 @@
+given a[]={a,b,c,d,e,f,g,h,};
+tot=i<<n;
+for(ll N=0;N<tot;N++)
+{
+  for(ll i=0;i<n;i++)
+  {
+     ll f=1<<i;
+     if(N&f!=0)
+     print element;
+  }
+  cout<<endl;
+}
