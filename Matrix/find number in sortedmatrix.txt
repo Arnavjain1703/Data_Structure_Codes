@@ -1,0 +1,37 @@
+Example 1:
+
+Input:
+n = 3, m = 3, x = 62
+matrix[][] = {{ 3, 30, 38},
+              {36, 43, 60},
+              {40, 51, 69}}
+Output: 0
+Explanation:
+62 is not present in the matrix, 
+so output is 0.
+
+
+class Solution{
+  public:
+    bool search(vector<vector<int> > matrix, int n, int m, int x) 
+    {
+       int I=0;
+       int J=m-1;
+       while(I<n && J>=0)
+       {
+           if(matrix[I][J]==x)
+           {
+               return true;
+           }
+           else if(matrix[I][J]>x)
+           {
+               J--;
+           }
+           else
+           {
+              I++; 
+           }
+       }
+       return false;
+    }
+};
