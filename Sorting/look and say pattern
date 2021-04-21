@@ -1,0 +1,33 @@
+Look and Say Pattern 
+Easy Accuracy: 85.56% Submissions: 576 Points: 2
+Given an integer n, what will be the nth row of the following look-and-say pattern.
+1
+11
+21
+1211
+111221
+
+
+ public:
+    string lookandsay(int n) {
+       if(n==1)
+       {
+           return "1";
+       }
+       string J=lookandsay(n-1); 
+       int T=1;
+       string G="";
+       for(int i=0;i<J.length();i++)
+       {
+           if(J[i]==J[i+1] && i!=(J.length()-1))
+           {
+               T++;
+           }
+           else
+           {
+               G=G+to_string(T)+J[i];
+               T=1;
+           }
+       }
+       return G;
+    }
