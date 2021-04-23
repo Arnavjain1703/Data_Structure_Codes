@@ -1,0 +1,96 @@
+Kartik Joshi (KJ) has a very beautiful girlfriend, Priyanka Sharma (PS). (hehe :P)
+
+She's very possesive and calls KJ and asks him to come tonight at her home to (most probably) meet.
+
+KJ and PS lives on x - axis. KJ's house is located on 0 and PS's house is located on p (a positive integer). There is only one road through which people can travel i.e. the x - axis. There are n street lights on the x - axis. The ith street light is situated at xi and has a characteristic ri so that it can spread light in the range [xi - ri, xi + ri]. The street lights emit rays which are self destructive in nature, which means that if there is some integer co-ordinate of road receiving light from more than one street lights, then the light on that co-ordinate vanishes, i.e. that co-ordinate remains dark.
+
+We all know that KJ is a kid and is afraid of dark. So he wishes to know before hand the maximum continuous number of integer co-ordinates he has to travel in the dark while going from his home to PS's home. Help him find the answer!
+
+Note: There may be more than one street light on the same integer co-ordinates. Also note that KJ always moves in the direction of PS's house.
+
+You don't need to care about the points whose co-ordinates lies outside the range [0, p].
+
+Input Format
+
+The first line contains two space seperated integers n and p, the number of street lights and the position of PS's house on x - axis.
+
+The next n lines contain two space seperated integers, xi and ri, the position of the ith street light and the characteristic of the ith street light.
+
+Constraints
+
+1 <= p <= 2,00,000
+
+0 <= n <= 2,00,000
+
+0 <= xi <= p
+
+0 <= ri <= 2,00,000
+
+Output Format
+
+Output a single integer, the maximum number of continuous integer co-ordinates KJ has to travel in the dark while going from his house on 0 to PS's house on p.
+
+Sample Input 0
+
+4 4
+1 2
+3 0
+0 2
+3 0
+Sample Output 0
+
+5
+
+
+
+
+ void solve()
+{
+   ll n,p;
+   cin>>n>>p;
+   vector<pair<ll,ll>>A;
+   ll B[p+1]={0};
+   for(ll i=0;i<n;i++)
+   {
+      ll x,r;
+      cin>>x>>r;
+      if((x-r)<0)
+      {
+        B[0]+=1;
+      }
+      else
+      {
+        B[x-r]+=1;
+      }
+      if((x+r)<p)
+      {
+        B[x+r+1]-=1;
+      }
+   }
+   ll sum=0;
+   ll count=0;
+   ll C=0;
+   for(ll i=0;i<=p;i++)
+   {
+     sum+=B[i];
+     if(sum!=1)
+     {
+        C++;
+     }
+     else
+     {
+       count=max(count,C);
+       C=0;
+     }
+   }
+   count=max(count,C);
+   cout<<count<<'\n';
+}
+int main() {
+    #ifndef ONLINE_JUDGE
+        freopen("inputf.in","r",stdin);
+        freopen("outputf.in","w",stdout);
+    #endif  
+   // int t; cin>>t ; while(t--)
+     solve();
+}
