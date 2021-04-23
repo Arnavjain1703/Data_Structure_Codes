@@ -1,0 +1,84 @@
+Rajiv and Nitish had a fight because Rajiv was annoying Nitish with his question. Rajiv being a genius in arrays gave Nitish an array of natural numbers A of length N with elements A1,  A2, . . ., AN. Nitish has to find the total amount of perfect pairs in the array.
+  
+A perfect pair (Ai, Aj) is a pair where (Ai + Aj) is a perfect square or a perfect cube and i ≠ j. 
+  
+Since Rajiv and Nitish are not talking with each other after the fight you have been given the question to solve and inturn make both of them a perfect pair again.
+  
+NOTE :-  A pair (Ai, Aj) and (Aj, Ai) are same and not to be counted twice.
+
+ 
+
+Input
+
+The first line on the input contains the a single integer T denoting the number of test cases. The first line of each test case contains a single integer N. The second line contains N space-separated integers A1,  A2, . . ., AN.
+
+Output
+
+For each test case, print a single line containing a single integer denoting the total number of perfect pairs.
+
+Constraints
+
+1 ≤  T ≤ 10
+1 ≤  N ≤ 105
+1 ≤  Ai ≤ 103
+
+Sample Input
+2
+5
+1 2 3 4 5
+4
+1 4 5 8
+Sample Output
+3
+2
+Time Limit: 1
+
+
+
+bool check(ll n)
+{
+   ll a=cbrt(n);
+   ll b=sqrt(n);
+   if(((a*a*a)==n)||((b*b)==n))
+   {
+    return true;
+   }
+   return false;
+}
+ void solve()
+{
+    ll N;
+    cin>>N;
+    ll a[N];
+    map<ll,ll>A;
+    for(ll i=0;i<N;i++)
+    {
+        cin>>a[i];
+        A[a[i]]++;
+    }
+    ll count=0;
+    for(ll i=1;i<=1000;i++)
+    { 
+      if(check(2*i))
+      { 
+
+        count+=(A[i]*(A[i]-1))/2;
+      }
+      for(ll j=i+1;j<=1000;j++)
+      {
+         if(check(i+j) && A[i] && A[j])
+         {
+           count=count+A[i]*A[j];
+         }
+      }
+    }
+    cout<<count<<'\n';
+}
+int main() {
+    #ifndef ONLINE_JUDGE
+        freopen("inputf.in","r",stdin);
+        freopen("outputf.in","w",stdout);
+    #endif  
+   int t; cin>>t ; while(t--)
+     solve();
+}
