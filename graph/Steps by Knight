@@ -1,0 +1,63 @@
+Given a square chessboard, the initial position of Knight and position of a target. Find out the minimum steps a Knight will take to reach the target position.
+
+Note:
+The initial and the target position co-ordinates of Knight have been given accoring to 1-base indexing.
+
+ 
+
+Example 1:
+
+Input:
+N=6
+knightPos[ ] = {4, 5}
+targetPos[ ] = {1, 1}
+Output:
+3
+Explanation:
+
+Knight takes 3 step to reach from 
+(4, 5) to (1, 1):
+(4, 5) -> (5, 3) -> (3, 2) -> (1, 1).
+
+
+int minStepToReachTarget(vector<int>&P, vector<int>&T, int N){
+	   int V[N][N];
+	   int L[N][N];
+	   for(int i=0;i<N;i++){
+	       for(int j=0;j<N;j++)
+	       {
+	           V[i][j]=0;
+	       }
+	   }
+	   L[P[0]-1][P[1]-1]=0;
+	   int X[8]={1,1,-1,-1,2,2,-2,-2};
+	   int Y[8]={2,-2,2,-2,1,-1,1,-1};
+	   queue<pair<int,int>>A;
+       V[P[0]-1][P[1]-1]=1;
+	   A.push(make_pair(P[0]-1,P[1]-1));
+	   int MIN=INT_MAX;
+	   while(A.empty()==false)
+	   {
+	       int size=A.size();
+	       for(int k=0;k<size;k++)
+	       {
+	           pair<int,int>D=A.front();
+	           if((D.first==(T[0]-1)) && (D.second==(T[1]-1)))
+	           {
+	               return L[D.first][D.second];
+	           }
+	           A.pop();
+	           for(int i=0;i<8;i++)
+	           {
+	               int I=D.first+X[i];
+	               int J=D.second+Y[i];
+	               if(!V[I][J]&&(I>=0)&&(I<N)&&(J>=0)&&(J<N))
+	               {
+	                   V[I][J]=1;
+	                   L[I][J]=1+L[D.first][D.second];
+	                   A.push(make_pair(I,J));
+	               }
+	           }
+	       }
+	   }
+	}
