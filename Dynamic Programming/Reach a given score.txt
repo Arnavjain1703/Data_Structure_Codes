@@ -1,0 +1,38 @@
+Consider a game where a player can score 3 or 5 or 10 points in a move. Given a total score n, find the number of distinct combinations to reach the given score.
+
+Example 1:
+
+Input:
+n = 8
+Output: 1
+Explanation:when n = 8,{3,5} and {5,3}
+are the two possible permutations but
+these represent the same cobmination.
+Hence output is 1.s
+
+
+ll count(ll n) 
+{
+    ll arr[4]={0,3,5,10};
+    ll M[n+1][4];
+    for(ll i=0;i<4;i++)
+    {
+        M[0][i]=1;
+    }
+    for(ll i=1;i<=n;i++)
+    {
+        M[i][0]=0;
+    }
+    for(ll i=1;i<=n;i++)
+    {
+        for(ll j=1;j<4;j++)
+        {
+            M[i][j]=M[i][j-1];
+            if(arr[j]<=i)
+            {
+                M[i][j]+=M[i-arr[j]][j];
+            }
+        }
+    }
+    return M[n][3];
+}
