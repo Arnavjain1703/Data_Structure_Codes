@@ -1,0 +1,66 @@
+Let N be a positive odd number.
+
+There are 
+N coins, numbered 1,2,…,N. For each i(1≤i≤N), when Coin i is tossed, it comes up heads with probability piand tails with probability 1−pi.
+
+N is an odd number.
+1≤N≤2999
+pi is a real number and has two decimal places.
+
+0<pi<1
+
+
+void solve()
+{
+   ll N;
+   cin>>N;
+   double A[N];
+   for(ll i=0;i<N;i++)
+   {
+    cin>>A[i];
+   }
+   double dp[N][N+1]={0};
+   for(ll i=0;i<N;i++)
+   {
+    for(ll j=0;j<N+1;j++)
+    {
+      dp[i][j]=0.00;
+    }
+   }
+   dp[0][0]=1-A[0];
+   dp[0][1]=A[0];
+   for(ll i=1;i<N;i++)
+   {
+    for(ll j=0;j<=i+1;j++)
+    {
+      if(j==(i+1))
+      {
+         dp[i][j]+=(A[i]*dp[i-1][j-1]);
+      }
+      else
+      {
+
+      dp[i][j]+=(1-A[i])*dp[i-1][j];
+      if(j>0)
+      {
+      dp[i][j]+=A[i]*dp[i-1][j-1];
+      } 
+      }
+    }
+   }
+   double ans=0;
+     for(ll j=N/2+1;j<=N;j++)
+      {
+        ans+=dp[N-1][j];
+      }
+   printf("%0.9lf",ans);
+  }
+int main() {
+    FASTIO
+   // int t; cin>>t ; while(t--)
+    #ifndef ONLINE_JUDGE
+    freopen("inputf.in","r",stdin);
+    freopen("outputf.in","w",stdout);
+  #endif 
+     solve();
+}
