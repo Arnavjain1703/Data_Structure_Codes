@@ -1,0 +1,99 @@
+All strings in Chefland are beautiful because they are binary strings (a binary string contains only characters '0' and '1'). The beauty of a binary string S is defined as the number of pairs (i,j) (1≤i≤j≤|S|) such that the substring Si,Si+1,…,Sj is special.
+
+For a binary string U, let's denote the number of occurrences of the characters '1' and '0' in U by cnt1 and cnt0 respectively; then, U is special if cnt0=cnt1⋅cnt1.
+
+Today, Chef's friend Araspa is celebrating her birthday. Chef wants to give Araspa the most beautiful binary string he can find. Currently, he is checking out binary strings in a shop, but he needs your help to calculate their beauties. Tell Chef the beauty of each binary string he gives you.
+
+Input
+The first line of the input contains a single integer T denoting the number of test cases. The description of T test cases follows.
+The first and only line of each test case contains a single string S.
+Output
+For each test case, print a single line containing one integer — the beauty of the string S.
+
+Constraints
+1≤T≤10
+1≤|S|≤105
+each character of S is '0' or '1'
+Example Input
+2
+010001
+10
+Example Output
+4
+1
+
+
+
+void solve()
+{
+  string s;
+  cin>>s;
+  ll count[s.length()];
+  for(ll i=0;i<s.length();i++)
+  {
+     if(s[i]=='1' && i==0)
+     {
+       count[i]=1;
+     }
+     else if(s[i]=='1')
+     {
+       count[i]=count[i-1]+1;
+     }
+     else
+      {
+         if(i==0)
+         {
+           count[i]=0;
+         }
+         else
+         {
+          count[i]=count[i-1];
+         }
+      }
+  }  
+   ll counts=0;
+  for(ll i=1;;i++)
+  {
+    ll x=i+i*i;
+    if(x>s.length())
+    {
+        break;
+    }
+    ll I=0;
+    ll J=x-1;
+    ll count1=0;
+    ll count2=0;
+    while(J<s.length())
+    {
+       count1=0;
+       count2=0; 
+       if(I==0)
+       {
+          count1=count[J];
+       }
+       else
+       {
+          count1=count[J]-count[I-1];
+       }
+       count2=x-count1;
+       if(count2==count1*count1)
+       {
+          counts++;
+       }
+       I++;
+       J++;
+    }
+  }
+   cout<<counts<<'\n';
+}
+int main() {
+  #ifndef ONLINE_JUDGE
+    freopen("inputf.in","r",stdin);
+    freopen("outputf.in","w",stdout);
+  #endif 
+    ll T;
+    cin>>T;
+    while(T--)    
+    solve();
+  return 0;
+}
