@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll prime[1000000];
+pair<vector<ll>,ll>M;
+void sieve()
+{
+  prime[0]=0;
+  prime[1]=0;
+  for(int i=2;i<1000000;i++)
+    prime[i]=1;
+ 
+  for(int i=2;i*i<1000000;i++)
+    if(prime[i]==1)
+      for(int j=i*i;j<1000000;j+=i)
+        prime[j]=0;
+}
+void solve()
+{
+  ll L,H;
+  cin>>L>>H;
+  ll limit=floor(sqrt(H))+1;
+  vector<ll>B;
+  for(ll i=2;i<=limit;i++)
+  {
+    if(prime[i])
+    B.push_back(i);
+  }
+  ll n=H-L+1;
+  ll mark[n + 1];
+  memset(mark,0, sizeof(mark));
+  for(ll i=0;i<B.size();i++)
+  {
+    ll start=L/B[i]*B[i];
+    if(start<L)
+    {
+      start+=B[i];
+    }
+    if(start==B[i])
+    {
+      start+=B[i];
+    }
+    for(ll J=start;J<=H;J+=B[i])
+    {
+       mark[J-L]=1;
+    }
+  }
+  for(ll i=L;i<=H;i++)
+  {
+    if(!mark[i-L] && i!=1 && i!=0)
+    {
+
+      cout<<i<<'\n';
+    }
+  }
+  cout<<'\n';
+}
+int main() {
+    sieve();
+    ll T;
+    cin>>T;
+    while(T--)    
+    solve();
+  return 0;
+}
