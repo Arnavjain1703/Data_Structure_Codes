@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int arr[10]={13,15,12,14,16,8,6,4,10,30};
+    stack<int>s;
+    for(int i=0;i<10;i++)
+    {
+        if(s.empty())
+        {
+            s.push(i);
+            cout<<i+1<<'\n';
+        }
+        else
+        {  
+            while(!s.empty() && arr[s.top()]<=arr[i])
+            {
+                s.pop();
+            }
+            if(s.empty())
+            {
+                cout<<i+1<<'\n';
+            }
+            else{
+                cout<<i-s.top()<<'\n';
+            }
+            s.push(i);
+        }
+    }
+}
