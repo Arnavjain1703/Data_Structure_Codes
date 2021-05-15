@@ -1,56 +1,6 @@
 #include <iostream>
 using namespace std;
-class mystack
-{
-    private:
-     int *a;
-     int C;
-     int top;
-    public:
-    mystack(int C)
-    {
-       this->C=C;
-       this->top=-1;
-       a=new int(C);
-    }
-    void push(int A)
-    {
-        if(this->top+1==this->C)
-        {
-            cout<<"OVERFLOW"<<'\n';
-        }
-        else
-        {
-             
-             top+=1;
-             this->a[top]=A;
-             cout<<a[top]<<" "<<"PUSHED"<<'\n';
-            //  a[top]=A;
-        }
-    }
-    void Top()
-    {
-         if(top==-1)
-         {
-             cout<<"NO Element"<<'\n';
-         }
-         else
-         {
-             cout<<a[top]<<'\n';
-         }
-    }
-    void  pop()
-    {
-        if(top==-1)
-        {
-            cout<<"underflow"<<'\n';
-        }
-        else{
-            cout<<a[top]<<" "<<"is popped"<<'\n';
-            top--;
-        }
-    }
-};
+
 int main() {
     mystack S(3);
     S.push(1);
