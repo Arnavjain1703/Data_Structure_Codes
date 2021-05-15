@@ -1,0 +1,90 @@
+#include <iostream>
+using namespace std;
+class Node
+{ 
+   public:                                        //or struct can also be used                      
+   Node*next;
+   int data;
+   Node(int data)
+   {
+       this->data=data;
+       next=NULL;
+   }
+};
+class mystack
+{
+    Node*head;
+    int size=0;
+    public:
+    mystack()
+    {
+        head=NULL;
+        size=0;
+    }
+    void push(int data)
+    {
+        Node*temp=new Node(data);
+        if(head==NULL)
+        {
+            head=temp;
+        }
+        else
+        {
+            temp->next=head;
+            size++;
+            head=temp;
+        }
+        cout<<"PUSHED"<<"\n";
+    }
+    void Top()
+    {
+        if(head==NULL)
+        {
+            cout<<"EMPTY STack"<<'\n';
+        }
+        else
+        {
+        cout<<head->data<<'\n';
+        }
+    }
+    void pop()
+    {
+         if(head==NULL)
+         {
+             cout<<"UNDERFLOW"<<'\n';
+         }
+         else
+         {
+             Node*temp=head;
+             head=head->next;
+             delete(temp);
+         }
+    }
+
+};
+int main() {
+    mystack S;
+    S.push(1);
+    S.push(2);
+    S.push(3);
+    S.Top();
+    S.pop();
+    S.Top();
+    S.pop();
+    S.Top();
+    S.pop();
+    S.Top();
+    S.pop();
+}
+
+OUTPUR:-
+
+
+PUSHED
+PUSHED
+PUSHED
+3
+2
+1
+EMPTY STack
+UNDERFLOW
