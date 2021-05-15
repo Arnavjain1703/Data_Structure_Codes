@@ -1,0 +1,62 @@
+Find maximum the area of Rectangle from by bars of width 1 and height of bar equal to number given in array
+
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int arr[10]={13,15,12,14,16,8,6,4,10,30};
+    stack<int>s;
+    int L[10];
+    int R[10];
+    for(int i=0;i<10;i++)
+    {
+        if(s.empty())
+        {
+            L[i]=-1;
+            s.push(i);
+        }
+        else
+        {
+            while(!s.empty() && arr[s.top()]>=arr[i])
+            {
+                s.pop();
+            }
+            if(s.empty())
+            {
+                L[i]=-1;
+            }
+            else{
+                L[i]=s.top();
+            }
+        }
+        s.push(i);
+    }
+    for(int i=9;i>=0;i--)
+    {
+         if(s.empty())
+        {
+            R[i]=10;
+            s.push(i);
+        }
+        else
+        {
+            while(!s.empty() && arr[s.top()]>=arr[i])
+            {
+                s.pop();
+            }
+            if(s.empty())
+            {
+                R[i]=10;
+            }
+            else{
+                R[i]=s.top();
+            }
+            s.push(i);
+        }
+    }
+    int Max=INT_MIN;
+    for(int i=0;i<10;i++)
+    {
+        Max=max(Max,(R[i]-L[i]-1)*arr[i]);
+    }
+    cout<<Max<<'\n';
+  }
