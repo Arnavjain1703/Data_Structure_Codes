@@ -1,0 +1,25 @@
+  long long getMaxArea(long long arr[], int n)
+    {
+      stack<long long>A;
+      long long Max=INT_MIN;
+      for(long long i=0;i<n;i++)
+      {
+          while(!A.empty() && arr[i]<=arr[A.top()])
+          {
+              long long tp=A.top();
+              A.pop();
+              long long curr=arr[tp]*(A.empty()?i:(i-A.top()-1));
+              Max=max(Max,curr);
+          }
+          A.push(i);
+      
+      }
+      while(!A.empty())
+      {
+          long long tp=A.top();
+          A.pop();
+          long long curr=arr[tp]*(A.empty()?n:(n-A.top()-1));
+          Max=max(Max,curr);
+      }
+        return Max;
+    }
