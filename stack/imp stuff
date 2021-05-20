@@ -5,3 +5,7 @@ push(g) – Adds the element ‘g’ at the top of the stack – Time Complexity
 pop() – Deletes the top most element of the stack – Time Complexity : O(1) 
 
 Popping an element from a stack will take O(1) time complexity. Popping the last element in a stack will take O(n).
+============================================================================================
+
+We need Infix and Associtavity rule when we converting Infix to Postfix or Prefix;
+But While Evaluating Postfix or Prefix We Donot need 
