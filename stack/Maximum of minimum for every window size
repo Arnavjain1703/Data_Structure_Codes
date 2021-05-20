@@ -1,0 +1,80 @@
+ vector <int> maxOfMin(int arr[], int n)
+    {
+      stack<int>S;
+      int L[n];
+      int R[n];
+      int MIN=INT_MAX;
+      for(int i=0;i<n;i++)
+      {
+          MIN=min(MIN,arr[i]);
+          if(S.empty())
+          {
+              S.push(i);
+              L[i]=-1;
+          }
+          else
+          {
+             while(!S.empty() && arr[S.top()]>=arr[i])
+             {
+                S.pop();    
+             }
+             if(S.empty())
+             {
+                 L[i]=-1;
+             }
+             else
+             {
+                 L[i]=S.top();
+             }
+             S.push(i);
+          }
+      }
+      while(!S.empty())
+      {
+          S.pop();
+      }
+      for(int i=n-1;i>=0;i--)
+      {
+          if(S.empty())
+          {
+              S.push(i);
+              R[i]=n;
+          }
+          else
+          {
+             while(!S.empty() && arr[S.top()]>=arr[i])
+             {
+                S.pop();    
+             }
+             if(S.empty())
+             {
+                 R[i]=n;
+             }
+             else
+             {
+                 R[i]=S.top();
+             }
+             S.push(i);
+          }
+      }
+      int A[n+1];
+      for(int i=0;i<=n;i++)
+      {
+          A[i]=MIN;
+      }
+      for(int i=0;i<n;i++)
+      {
+          int X=R[i]-L[i]-1;
+          A[X]=max(arr[i],A[X]);
+      }
+      for(int i=n-1;i>0;i--)
+      {
+         A[i]=max(A[i],A[i+1]);
+      }
+      vector<int>B;
+      for(int i=1;i<=n;i++)
+      {
+          B.push_back(A[i]);
+      }
+      return B;
+    }
