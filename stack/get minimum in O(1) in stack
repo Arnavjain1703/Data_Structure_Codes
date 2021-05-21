@@ -1,0 +1,50 @@
+int Min;
+/*returns min element from stack*/
+int _stack :: getMin()
+{
+    if(s.empty())
+    {
+        return -1;
+    }
+   return Min;
+}
+
+/*returns poped element from stack*/
+int _stack ::pop()
+{
+    if(s.empty())
+    {
+        return -1;
+    }
+    if(s.top()<0)
+    {
+        int g=Min;
+        Min=Min-s.top();
+        s.pop();
+        return g;
+    }
+   
+    int T=s.top();
+    s.pop();
+    return T;
+}
+
+/*push element x into the stack*/
+void _stack::push(int x)
+{     
+     if(s.empty())
+     {
+         s.push(x);
+         Min=x;
+     }
+     else
+     {
+     int t=x;
+     if(x<Min)
+     {   
+         t=x-Min;
+         Min=x;
+     }
+     s.push(t);
+     }
+}
