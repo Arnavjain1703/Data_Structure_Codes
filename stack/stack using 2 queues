@@ -1,0 +1,48 @@
+int t1=1;
+//Function to push an element into stack using two queues.
+void QueueStack :: push(int x)
+{
+    if(t1)
+    {
+        q1.push(x);
+    }
+    else
+    {
+        q2.push(x);
+    }
+}
+
+//Function to pop an element from stack using two queues. 
+int QueueStack :: pop()
+{
+    if(t1)
+    {
+       while(!q1.empty())
+       {
+            int T=q1.front();
+            q1.pop();
+            if(q1.empty())
+            {
+                t1=0;
+                return T;
+            }
+            q2.push(T);
+       }
+       return -1;
+    }
+    else
+    {
+         while(!q2.empty())
+       {
+            int T=q2.front();
+            q2.pop();
+            if(q2.empty())
+            {
+                t1=1;
+                return T;
+            }
+            q1.push(T);
+       }
+       return -1;
+    }
+}
