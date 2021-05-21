@@ -1,0 +1,82 @@
+10. Max rectangle 
+Medium Accuracy: 47.59% Submissions: 26379 Points: 4
+Given a binary matrix. Find the maximum area of a rectangle formed only of 1s in the given matrix.
+
+Example 1:
+
+Input:
+n = 4, m = 4
+M[][] = {{0 1 1 0},
+         {1 1 1 1},
+         {1 1 1 1},
+         {1 1 0 0}}
+Output: 8
+Explanation: For the above test case the
+matrix will look like
+0 1 1 0
+1 1 1 1
+1 1 1 1
+1 1 0 0
+the max size rectangle is 
+1 1 1 1
+1 1 1 1
+and area is 4 *2 = 8.
+Your Task: 
+Your task is to complete the function maxArea which returns the maximum size rectangle area in a binary-sub-matrix with all 1’s. The function takes 3 arguments the first argument is the Matrix M[ ] [ ] and the next two are two integers n and m which denotes the size of the matrix M. 
+
+Expected Time Complexity : O(n*m)
+Expected Auixiliary Space : O(m)
+
+Constraints:
+1<=n,m<=1000
+0<=M[][]<=1
+
+Note:The Input/Ouput format and Example given are used for system's internal purpose, and should be used by a user for Expected Output only. As it is a function problem, hence a user should not read any input from stdin/console. The task is to complete the function specified, and not to write the full code.
+int maxArea(int M[MAX][MAX], int n, int m) {
+        int Max=0;
+        for(int i=0;i<n;i++)
+        {
+            if(i!=0)
+            {
+                for(int j=0;j<m;j++)
+                {
+                    if(M[i][j]!=0)
+                    {
+                      M[i][j]+=M[i-1][j];
+                    }
+                }
+            }
+        stack<int>A;
+        for(int j=0;j<m;j++)
+        {
+            while(!A.empty() && M[i][A.top()]>=M[i][j])
+            {
+                int tp=M[i][A.top()];
+                A.pop();
+                if(A.empty())
+                {
+                    Max=max(Max,tp*(j));
+                }
+                else
+                {
+                    Max=max(Max,tp*(j-A.top()-1));
+                }
+            }
+            A.push(j);
+        }
+        while(!A.empty())
+        {
+            int tp=M[i][A.top()];
+            A.pop();
+            if(A.empty())
+            { 
+                Max=max(Max,tp*(m));
+            }
+            else
+            {
+                Max=max(Max,tp*(m-A.top()-1));
+            }
+        }
+        }
+        return Max;
+    }
