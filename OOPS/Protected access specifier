@@ -1,0 +1,47 @@
+The protected access specifier hides its member variables and functions from other classes and objects. This type of variable or function can only be accessed in child class. It becomes very important while implementing inheritance.
+
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+class people
+{
+  protected:
+    string name;
+    int age;
+  public:
+   void setName(string name)
+   {
+     this->name=name;
+   }
+   void setage(int age)
+   {
+    this->age=age;
+   }
+};
+class student: public people
+{
+   private:
+    int id;
+   public:
+    void setId(int id)
+    {
+      this->id=id;
+    }
+    void display()
+    {
+      cout<<name<<" "<<age<<" "<<id<<'\n';
+    }
+};
+int main() {
+  #ifndef ONLINE_JUDGE
+    freopen("inputf.in","r",stdin);
+    freopen("outputf.in","w",stdout);
+  #endif  
+  student Arnav;
+  Arnav.setName("Arnav");
+  Arnav.setage(22);
+  Arnav.setId(2);
+  Arnav.display();
+}
+
+output Arnav 22 2
