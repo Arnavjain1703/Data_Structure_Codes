@@ -1,0 +1,52 @@
+Given a Binary Tree and a positive integer k. The task is to count all distinct nodes that are distance k from a leaf node. A node is at k distance from a leaf if it is present k levels above the leaf and also, is a direct ancestor of this leaf node. If k is more than the height of Binary Tree, then nothing should be counted.
+
+Example 1:
+
+Input:
+        1
+      /   \
+     2     3
+   /  \   /  \
+  4   5  6    7
+          \ 
+          8
+K = 2
+Output: 2
+Explanation: There are only two unique
+nodes that are at a distance of 2 units
+from the leaf node. (node 3 for leaf
+with value 8 and node 1 for leaves with
+values 4, 5 and 7)
+Note that node 2
+isn't considered for leaf with value
+8 because it isn't a direct ancestor
+of node 8.
+
+
+
+void  Set(Node*root,int k,vector<Node*>A,int i,int*count,unordered_map<Node*,int>&B)
+{
+     if(root==NULL)
+     {
+         return;
+     }
+     A.push_back(root);
+     if(root->left==NULL && root->right==NULL && A.size()>k)
+     {   
+         if(!B[A[A.size()-1-k]])
+         {  
+             *count=*count+1;
+             B[A[A.size()-1-k]]++;
+         }
+     }
+    Set(root->left,k,A,i+1,count,B);
+    Set(root->right,k,A,i+1,count,B);
+}
+int printKDistantfromLeaf(Node* root, int K)
+{
+   int count=0;  
+   vector<Node*>A;   
+   unordered_map<Node*,int>B;
+   Set(root,K,A,0,&count,B);
+   return count;
+}
