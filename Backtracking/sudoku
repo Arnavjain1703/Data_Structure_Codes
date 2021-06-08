@@ -1,0 +1,115 @@
+Given an incomplete Sudoku configuration in terms of a 9 x 9  2-D square matrix (grid[][]), the task to find a solved Sudoku. For simplicity, you may assume that there will be only one unique solution.
+
+Sample Sudoku for you to get the logic for its solution:
+
+
+
+
+Example 1:
+
+Input:
+grid[][] = 
+[[3 0 6 5 0 8 4 0 0],
+[5 2 0 0 0 0 0 0 0],
+[0 8 7 0 0 0 0 3 1 ],
+[0 0 3 0 1 0 0 8 0],
+[9 0 0 8 6 3 0 0 5],
+[0 5 0 0 9 0 6 0 0],
+[1 3 0 0 0 0 2 5 0],
+[0 0 0 0 0 0 0 7 4],
+[0 0 5 2 0 6 3 0 0]]
+Output:
+3 1 6 5 7 8 4 9 2
+5 2 9 1 3 4 7 6 8
+4 8 7 6 2 9 5 3 1
+2 6 3 4 1 5 9 8 7
+9 7 4 8 6 3 1 2 5
+8 5 1 7 9 2 6 4 3
+1 3 8 9 4 7 2 5 6
+6 9 2 3 5 1 8 7 4
+7 4 5 2 8 6 3 1 9
+
+
+  bool issafe(int board[N][N],int row, int col, int num) 
+    { 
+            for(int i=0;i<N;i++)
+            {
+                if((board[i][col]==num)||(board[row][i]==num))
+                {
+                    return false;
+                }
+            }
+            int S=sqrt(N);
+            int I=row-(row%S);
+            int J=col-(col%S);
+            for(int i=0;i<S;i++)
+            {
+                for(int j=0;j<S;j++)
+                {
+                    if(board[i+I][j+J]==num)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+    } 
+
+    bool SolveSudoku(int board[N][N])  
+    { 
+       int row = -1; 
+        int col = -1; 
+        bool isEmpty = true; 
+        for (int i = 0; i < N; i++)  
+        { 
+            for (int j = 0; j < N; j++)  
+            { 
+                if (board[i][j] == 0)  
+                { 
+                    row = i; 
+                    col = j; 
+                    isEmpty = false; 
+                    break; 
+                } 
+            } 
+            if (!isEmpty) { 
+                break; 
+            } 
+        } 
+  
+        if (isEmpty)  
+        { 
+            return true; 
+        } 
+        
+        for (int num = 1; num <= N; num++)  
+        { 
+            if (issafe(board, row, col, num))  
+            { 
+                board[row][col] = num; 
+                if (SolveSudoku(board))  
+                { 
+                    // print(board, n); 
+                    return true; 
+                } 
+                else 
+                { 
+                    board[row][col] = 0; 
+                } 
+            } 
+        } 
+        return false; 
+    }
+    
+    //Function to print grids of the Sudoku.
+    void printGrid (int grid[N][N]) 
+    {
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<N;j++)
+            {
+                cout<<grid[i][j]<<" ";
+            }
+        }
+    }
+};
