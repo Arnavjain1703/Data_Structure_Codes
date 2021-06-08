@@ -1,0 +1,111 @@
+Given an array arr[] of N elements. The task is to count maximum number of  smaller elements on right side of any array element. For example, in {10, 6, 9, 7, 20, 19, 21, 18, 17, 16}, the result is 4.  Note that 20 has maximum 4 smaller elements on right side. Other elements have less count, for example 10 has 3 smaller elements on right side.
+
+Input:
+First line of input contains number of testcases T. For each testcase, first line of input contains number of elements in the array and next line contains array elements.
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+
+
+void display(int s,int e,pair<int,int>A[])
+{
+    for(int i=s;i<=e;i++)
+    {
+        cout<<A[i].first<<":"<<A[i].second<<'/'<<" ";
+    }
+    cout<<'\n';
+}
+void mergesort(int s,int mid,int e,pair<int,int>A[])
+{
+    int n1=mid-s+1;
+    int n2=e-mid;
+    pair<int,int> a1[n1];
+    pair<int,int> b1[n2];
+    for(int i=s;i<=mid;i++)
+    {
+        a1[i-s]=A[i];
+    }
+    for(int i=mid+1;i<=e;i++)
+    {
+        b1[i-mid-1]=A[i];
+    }
+    int I=0;
+    int J=0;
+    int K=s;
+    int count=0;
+    while(I<n1 && J<n2)
+    {
+        if(a1[I].first<=b1[J].first)
+        {
+            A[K]=a1[I];
+            A[K].second=A[K].second+count;
+            I++;
+        }
+        else
+        {
+            A[K]=b1[J];
+            count++;
+            J++;
+        }
+        K++;
+    }
+    while(I<n1)
+    {
+        A[K]=a1[I];
+        A[K].second=A[K].second+count;
+        I++;
+        K++;
+    }
+    while(J<n2)
+    {
+        A[K]=b1[J];
+        J++;
+        K++;
+    }
+    display(0,n1-1,a1);
+    display(0,n2-1,b1);
+    display(s,e,A);
+}
+void merge(int s,int e,pair<int,int>A[])
+{
+    if(s>=e)
+    {
+        return;
+    }
+    int mid=(s+e)/2;
+    merge(s,mid,A);
+    merge(mid+1,e,A);
+    mergesort(s,mid,e,A);
+    
+}
+void solve()
+{
+    int N;
+    cin>>N;
+    pair<int,int>A[N];
+    for(int i=0;i<N;i++)
+    {
+        int X;
+        cin>>X;
+        A[i]=make_pair(X,0);
+    }
+    merge(0,N-1,A);
+    int Max=INT_MIN;
+    for(int i=0;i<N;i++)
+    {
+        Max=max(Max,A[i].second);
+    }
+    cout<<Max<<'\n';
+}
+int main() {
+    int T;
+    cin>>T;
+    while(T--)
+    {
+        solve();
+    }
+}
