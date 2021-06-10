@@ -1,0 +1,38 @@
+Given an integer N representing the number of pairs of parentheses, the task is to generate all combinations of well-formed(balanced) parentheses.
+
+
+Example 1:
+
+Input:
+N = 3
+Output:
+((()))
+(()())
+(())()
+()(())
+()()()
+
+   void addparenthesis(int N,vector<string>&V ,char c,string J,int I,int j,int n)
+    {
+        J=J+c;
+        if(N==1)
+        {
+            V.push_back(J);
+            return;
+        }
+        if(I<n)
+        {
+        addparenthesis(N-1,V,'(',J,I+1,j,n);
+        }
+        if(j<I)
+        {
+        addparenthesis(N-1,V,')',J,I,j+1,n);
+        }
+    }
+    vector<string> AllParenthesis(int n) 
+    {
+        string J="";
+        vector<string>V;
+        addparenthesis(n*2,V,'(',J,1,0,n);
+        return V;
+    }
