@@ -1,0 +1,89 @@
+Given an integer array a[ ] of N elements and an integer K, the task is to check if the array a[ ] could be divided into K non-empty subsets with equal sum of elements.
+Note: All elements of this array should be part of exactly one partition.
+
+Example 1:
+
+Input: 
+N = 5
+a[] = {2,1,4,5,6}
+K = 3
+Output: 
+1
+Explanation: we can divide above array 
+into 3 parts with equal sum as (2, 4), 
+(1, 5), (6)
+
+  bool check(vector<int>C,unordered_set<int>&B)
+    {
+        for(auto X:C)
+        {
+            if(B.find(X)!=B.end())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    bool backtrack(vector<vector<int>>C,int I,int K,unordered_set<int>&B)
+    {
+        if(I==K)
+        {
+            return true;
+        }
+        for(int i=0;i<C.size();i++)
+        {
+            if(check(C[i],B))
+            {
+                for(auto X:C[i])
+                {
+                    B.insert(X);
+                }
+                if(backtrack(C,I+1,K,B))
+                {
+                    return true;
+                }
+                else
+                {
+                   for(auto X:C[i])
+                   {
+                     B.erase(X);
+                   } 
+                }
+            }
+        }
+        return false;
+    }
+    bool isKPartitionPossible(int a[], int n, int k)
+    {
+         int sum=0;
+         for(int i=0;i<n;i++)
+         {
+             sum+=a[i];
+         }
+         if(sum%k!=0)
+         {
+             return false;
+         }
+         vector<vector<int>>C;
+         int T=1<<n;
+         for(int i=1;i<T;i++)
+         {
+             vector<int>B;
+             int S=0;
+             for(int j=0;j<n;j++)
+             {
+               if(i&(1<<j))
+               {
+                   S+=a[j];
+                   B.push_back(j);
+               }
+             }
+             if(S==(sum/k))
+             {
+                 C.push_back(B);
+             }
+         }
+         unordered_set<int>B;
+         return backtrack(C,0,k,B);
+    }
+
