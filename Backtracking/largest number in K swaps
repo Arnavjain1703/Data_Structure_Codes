@@ -1,0 +1,46 @@
+Given a number K and string str of digits denoting a positive integer, build the largest number possible by performing swap operations on the digits of str at most K times.
+
+
+Example 1:
+
+Input:
+K = 4
+str = "1234567"
+Output:
+7654321
+Explanation:
+Three swaps can make the
+input 1234567 to 7654321, swapping 1
+with 7, 2 with 6 and finally 3 with 5
+
+
+ void findMax(string str, int k,string Max,string& S,int cur) {
+    if(k==0||cur==str.length())
+    return;
+    if(Max[cur]!=str[cur])
+    {
+        k--;
+    }
+    for(int i=cur;i<str.length();i++)
+    {
+        if(str[i]==Max[cur])
+        {
+            swap(str[i],str[cur]);
+            if(S<str)
+            {   
+                S=str;
+            }
+            findMax(str,k,Max,S,cur+1);
+            swap(str[i],str[cur]);
+        }
+    }
+}
+
+    string findMaximumNum(string str, int k)
+    {     
+          string Max=str;
+          sort(Max.begin(),Max.end(),greater<int>());
+          string S=str;
+          findMax(str,k,Max,S,0);
+          return S;
+    }
