@@ -1,0 +1,40 @@
+Given an array Arr that contains N integers (may be positive, negative or zero). Find the product of the maximum product subarray.
+
+Example 1:
+
+Input:
+N = 5
+Arr[] = {6, -3, -10, 0, 2}
+Output: 180
+Explanation: Subarray with maximum product
+is 6, -3, -10 which gives product as 180.
+
+
+
+	long long maxProduct(int *arr, int n) {
+	   long long Min=arr[0];
+	   long long Max=arr[0];
+	   long long Main=arr[0];
+	   long long t=0;
+	   for( long long i=1;i<n;i++)
+	   {
+	       if(t)
+	       {
+	           Max=arr[i];
+	           Min=arr[i];
+	           t=0;
+	           continue;
+	       }
+	       if(!arr[i])
+	       {
+	           t=1;
+	           continue;
+	       }
+	       long long temp=Max;
+	       long long X=arr[i];
+	       Max=max(X,max(X*Max,X*Min));
+	       Min=min(X,min(X*temp,X*Min));
+	       Main=max(Main,Max);
+	   }
+	  return Main;
+	}

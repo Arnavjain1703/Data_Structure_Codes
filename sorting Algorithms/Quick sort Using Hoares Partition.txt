@@ -1,0 +1,42 @@
+ll Hoares_Partition(ll arr[],ll l,ll h)
+{
+   ll I=l-1;
+   ll J=h+1;
+   ll p=arr[l];
+   while(1)
+   {
+      do
+      {
+        I++;
+      }
+      while(arr[I]<p);
+      do
+      {
+        J--;
+      }
+      while(arr[J]>p);
+      if(I>=J)
+      {
+        return J;
+      }
+      swap(arr[I],arr[J]);
+   }
+}
+void Qsort(ll arr[],ll l,ll h)
+{
+   if(l<h)
+   {
+     ll I=Hoares_Partition(arr,l,h);
+     Qsort(arr,l,I);
+     Qsort(arr,I+1,h);
+   }
+}
+int main() {
+  #ifndef ONLINE_JUDGE
+    freopen("inputf.in","r",stdin);
+    freopen("outputf.in","w",stdout);
+  #endif  
+  ll arr[7]={1,6,5,2,3,8,7};
+  Qsort(arr,0,6);
+  for(ll i=0;i<7;i++){cout<<arr[i]<<' ';}
+}
