@@ -1,0 +1,44 @@
+Given a string S such that it may contain repeated lowercase alphabets. Rearrange the characters in the string such that no two adjacent characters are same.
+ 
+
+Example 1:
+
+Input:
+S = geeksforgeeks
+Output: 1
+Explanation: egeskerskegof can be one way of
+rearranging the letters.
+
+
+string rearrangeString(string str)
+    {
+    	unordered_map<char,int>B;
+    	int Max=0;
+    	for(int i=0;i<str.length();i++)
+    	{
+    	    B[str[i]]++;
+    	}
+    	string C="";
+    	priority_queue<pair<int,char>>Q;
+    	for(auto X:B)
+    	{
+    	    Q.push(make_pair(X.second,X.first));
+    	}
+    	pair<int,char>prev=Q.top();
+    	Q.pop();
+    	C=C+prev.second;
+    	while(Q.empty()==false)
+    	{
+    	  pair<int,char>curr=Q.top();
+    	  Q.pop();
+    	  prev.first=prev.first-1;
+    	  if(prev.first>0)
+    	  {
+    	      Q.push(make_pair(prev.first,prev.second));
+    	  }
+    	  C=C+curr.second;
+    	  prev=curr;
+    	}
+    // 	cout<<C<<'\n';
+    	return C;
+    }
