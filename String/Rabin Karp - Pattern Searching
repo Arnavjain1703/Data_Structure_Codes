@@ -1,0 +1,63 @@
+Given a string S and a pattern P of lowercase characters. The task is to check if the pattern is present in string or not.
+
+Example 1:
+
+Input:
+S = aabaacaadaabaaba
+P = aaba
+Output: Yes
+Explanation: You can find the patter at
+starting at index 12.
+
+
+bool search(string pat, string txt, int q) 
+{ 
+	if(pat.length()>txt.length())
+	{
+	    return false;
+	}
+	long long P=0;
+	long long T=0;
+	for(int i=0;i<pat.length();i++)
+	{
+	    P=P+(pat[i]-'a'+1);
+	    T=T+(txt[i]-'a'+1);
+	}
+	if(P==T)
+	{
+	    int T=0;
+	    for(int i=0;i<pat.length();i++)
+	    {
+	        if(pat[i]!=txt[i])
+	        {
+	          T=1;
+	          break;
+	        }
+	    }
+	    if(!T)
+	    {
+	        return true;
+	    }
+	}
+	for(int i=pat.length();i<txt.length();i++)
+	{
+	   T=T-(txt[i-pat.length()]-'a'+1)+(txt[i]-'a')+1;
+	   if(P==T)
+	{
+	    int T=0;
+	    for(int j=0;j<pat.length();j++)
+	    {
+	        if(pat[j]!=txt[i+j-pat.length()+1])
+	        {
+	          T=1;
+	          break;
+	        }
+	    }
+	    if(!T)
+	    {
+	        return true;
+	    }
+	}
+	}
+	return false;
+} 
