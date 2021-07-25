@@ -1,0 +1,38 @@
+Given a binary tree. Find the preorder traversal of the tree without using recursion.
+
+
+Example 1:
+
+Input:
+           1
+         /   \
+        2     3
+      /  \
+     4    5
+Output: 1 2 4 5 3
+Explanation:
+Preorder traversal (Root->Left->Right) of 
+the tree is 1 2 4 5 3
+
+
+vector<int> preOrder(Node* root)
+{
+    stack<Node*>S;
+    S.push(root);
+    vector<int>V;
+    while(!S.empty())
+    {
+        V.push_back(S.top()->data);
+        Node*curr=S.top();
+        S.pop();
+        if(curr->right)
+        {
+            S.push(curr->right);
+        }
+        if(curr->left)
+        {
+            S.push(curr->left);
+        }
+    }
+    return V;
+}
