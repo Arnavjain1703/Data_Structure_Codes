@@ -1,0 +1,42 @@
+Given a binary tree. Find the postorder traversal of the tree without using recursion.
+
+Example 1
+
+Input:
+           1
+         /   \
+        2     3
+      /  \
+     4    5
+
+Output: 4 5 2 3 1
+Explanation:
+Postorder traversal (Left->Right->Root) of 
+the tree is 4 5 2 3 1.
+
+vector<int> postOrder(Node* node) { 
+    stack<Node*>S;
+    stack<Node*>S2;
+    S.push(node);
+    while(!S.empty())
+    {
+        Node*curr=S.top();
+        S.pop();
+        S2.push(curr);
+        if(curr->left)
+        {
+            S.push(curr->left);
+        }
+        if(curr->right)
+        {
+            S.push(curr->right);
+        }
+    }
+    vector<int>V;
+    while(S2.empty()==false)
+    {
+        V.push_back(S2.top()->data);
+        S2.pop();
+    }
+    return V;
+}
