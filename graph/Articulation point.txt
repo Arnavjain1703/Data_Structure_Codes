@@ -1,0 +1,78 @@
+Given a graph with n vertices, e edges and an array arr[] denoting the edges connected to each other, check whether it is Biconnected or not.
+Note: The given graph is Undirected.
+
+ 
+
+Example 1:
+
+Input:
+n = 2, e = 1
+arr = {0, 1}
+Output:
+1
+Explanation:
+       0
+      /
+     1
+The above graph is Biconnected
+
+
+void APpoint(int Ap[],int I,int V[],vector<int>adj[],int *T,int low[],int disc[],int parent)
+    {
+          V[I]=1;
+          low[I]=*T;
+          disc[I]=*T;
+          *T=*T+1;
+          int children=0;
+          for(int i=0;i<adj[I].size();i++)
+          {
+              int v=adj[I][i];   
+              if(!V[v])
+              {    children++;
+                   APpoint(Ap,v,V,adj,T,low,disc,I);
+                   low[I]=min(low[I],low[v]);
+                   if(parent==-1 && children>1)
+                   {
+                       Ap[I]=1;
+                   }
+                   if(parent!=-1 && disc[I]<=low[v])
+                   {
+                       Ap[I]=1;
+                   }
+              }
+              else if(parent!=v)
+              {
+                low[I]=min(disc[v],low[I]);
+              }
+          }
+    }
+    int biGraph(int arr[], int n, int e) {
+        vector<int>adj[n];
+        int low[n];
+        int disc[n];
+        int parent[n];
+        for(int i=0;i<2*e;i=i+2)
+        {
+            adj[arr[i]].push_back(arr[i+1]);
+            adj[arr[i+1]].push_back(arr[i]);
+        }
+        int AP[n];
+        int visited[n];
+        for(int i=0;i<n;i++)
+        {
+            AP[i]=0;
+            visited[i]=0;
+            parent[i]=-1;
+        }
+        int T=1;
+        APpoint(AP,0,visited,adj,&T,low,disc,-1);
+        for(int i=0;i<n;i++)
+        {
+            
+            if(AP[i]==1 || visited[i]==0)
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
