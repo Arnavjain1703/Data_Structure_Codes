@@ -1,0 +1,36 @@
+long long int numberOf2sinRange(long long int number)
+{
+   unordered_map<long long int,long long int>M;
+   M[10]=1;
+   M[100]=20;
+   M[1000]=300;
+   M[10000]=4000;
+   M[100000]=500000;
+   long long int count=0;
+   while(number)
+   {
+       long long int x=log10(number);
+       if(x==0 && number>=2)
+       {
+           count+=1;
+           number=0;
+       }
+       else
+       {
+           long long P=pow(10,x);
+           long long G=number/P;
+           count+=M[P]*G;
+          
+           if(G>2)
+           {
+               count+=pow(10,x);
+           }
+           else if(G==2)
+           {
+               count+=number%P+1;
+           }
+           number=number%P;
+       }
+   }
+   return count;
+}
