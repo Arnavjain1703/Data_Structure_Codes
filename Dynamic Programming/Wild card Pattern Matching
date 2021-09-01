@@ -1,0 +1,62 @@
+Wildcard Pattern Matching 
+Medium Accuracy: 43.9% Submissions: 26221 Points: 4
+Given two strings 'str' and a wildcard pattern 'pattern' of length N and M respectively,  You have to print '1' if the wildcard pattern is matched with str else print '0' .
+
+The wildcard pattern can include the characters ‘?’ and ‘*’
+‘?’ – matches any single character
+‘*’ – Matches any sequence of characters (including the empty sequence)
+
+Note: The matching should cover the entire str (not partial str).
+
+ 
+
+Example 1:
+
+Input:
+pattern = "ba*a?"
+str = "baaabab"
+Output: 1
+Explanation: replace '*' with "aab" and 
+'?' with 'b'. 
+
+ int arr[p.length()+1][str.length()+1];
+          for(int i=0;i<=p.length();i++)
+          {
+              for(int j=0;j<=str.length();j++)
+              {
+                  arr[i][j]=0;
+              }
+          }
+          arr[0][0]=1;
+          for(int i=1;i<=p.length();i++)
+          {
+              if(p[i-1]=='*')
+              {
+                  arr[i][0]=arr[i-1][0];
+              }
+          }
+          for(int i=1;i<=str.length();i++)
+          {
+              arr[0][i]=0;
+          }
+          for(int i=1;i<=p.length();i++)
+          {
+              for(int j=1;j<=str.length();j++)
+              {
+                
+                  if(p[i-1]=='?')
+                  {
+                      arr[i][j]=arr[i-1][j-1];
+                  }
+                  else if(p[i-1]=='*')
+                  {
+                      arr[i][j]=arr[i-1][j]||arr[i-1][j-1]||arr[i][j-1];
+                  }
+                  else if(p[i-1]==str[j-1])
+                  {
+                       
+                      arr[i][j]=arr[i-1][j-1];
+                  }
+              }
+          }
+          return arr[p.length()][str.length()];
