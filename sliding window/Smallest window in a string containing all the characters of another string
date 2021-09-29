@@ -1,0 +1,79 @@
+Given two strings S and P. Find the smallest window in the string S consisting of all the characters(including duplicates) of the string P.  Return "-1" in case there is no such window present. In case there are multiple such windows of same length, return the one with the least starting index. 
+
+Example 1:
+
+Input:
+S = "timetopractice"
+P = "toc"
+Output: 
+toprac
+Explanation: "toprac" is the smallest
+substring in which "toc" can be found.
+
+
+ string smallestWindow (string s, string p)
+    {
+         char M[26]={0};
+         char M2[26]={0};
+         int count=0;
+         int count2=0;
+         for(int i=0;i<p.length();i++)
+         {
+              M[p[i]-'a']++;
+              count++;
+         }
+         int I=0;
+         int x,y;
+         int MIN=INT_MAX;
+         for(int i=0;i<s.length();i++)
+         {
+             
+             if(M[s[i]-'a']&& M2[s[i]-'a']<M[s[i]-'a'])
+             {
+                
+                 M2[s[i]-'a']++;
+                 count2++;
+             if(count==count2)
+             {
+          
+                 while(I<=i)
+                 {
+                     if(!M[s[I]-'a'])
+                     {
+                         I++;
+                     }
+                     else if(M[s[I]-'a'] && M[s[I]-'a']<M2[s[I]-'a'])
+                     {
+                          M2[s[I]-'a']--;
+                          I++;
+                     }
+                     else if(M[s[I]-'a'] && M[s[I]-'a']==M2[s[I]-'a'])
+                     {
+                       
+                         if(MIN>(i-I+1))
+                         {
+                             MIN=i-I+1;
+                             x=I;
+                             y=i;
+                         }
+                          M2[s[I]-'a']--;
+                          I++;
+                          count2--;
+                          break;
+                     }
+                 }
+             }
+             }
+             else if(M[s[i]-'a'])
+             {
+                 M2[s[i]-'a']++;
+             }
+            
+         }
+         if(MIN==INT_MAX)
+         {
+             return "-1";
+         }
+        string S=s.substr(x,y-x+1);
+         return S;
+    }
