@@ -1,0 +1,56 @@
+int find(int I,int J,int target,vector<int>&arr)
+    {
+       if(I>J)
+       {
+           return -1;
+       }
+        int mid=(I+J)/2;
+        if(mid!=arr.size()-1 && arr[mid]>arr[mid+1])
+        {
+            return mid;
+        }
+        if(arr[I]>arr[mid])
+        {
+            return find(I,mid-1,target,arr);
+        }
+        else
+        {
+            return find(mid+1,J,target,arr);
+        }
+    }
+    int find2(int I,int J,int target, vector<int>&nums)
+    {
+        if(I>J)
+        {
+            return -1;
+        }
+        int mid=(I+J)/2;
+        if(nums[mid]==target)
+        {
+            return mid;
+        }
+        if(nums[mid]>target)
+        {
+            return find2(I,mid-1,target,nums);
+        }
+        else
+        {
+            return find2(mid+1,J,target,nums);
+        }
+         
+    }
+    int search(vector<int>& nums, int target) {
+         int K=find(0,nums.size()-1,target,nums);
+         if(K==-1)
+         {
+              return find2(0,nums.size()-1,target,nums);    
+         }
+         else if(nums[0]<=target && nums[K]>=target)
+         {
+            return find2(0,K,target,nums);         
+         }
+         else
+         {
+             return find2(K+1,nums.size()-1,target,nums);
+         }
+    }
